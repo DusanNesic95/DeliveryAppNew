@@ -14,16 +14,16 @@ angular.module('starter.controllers', ['ngCordova'])
   $(function () {
     var body = $('#logoFirst');
     var backgrounds = [
-      'url(../img/soda1.png)',
-      'url(../img/water.png)',
-      'url(../img/chips.png)',
-      'url(../img/chicken.png)',
-      'url(../img/ice.png)',
-      'url(../img/cola.png)',
-      'url(../img/mix.png)',
-      'url(../img/peanut.png)',
-      'url(../img/sona.png)',
-      'url(../img/meat.png)'];
+      'url(img/soda1.png)',
+      'url(img/water.png)',
+      'url(img/chips.png)',
+      'url(img/chicken.png)',
+      'url(img/ice.png)',
+      'url(img/cola.png)',
+      'url(img/mix.png)',
+      'url(img/peanut.png)',
+      'url(img/sona.png)',
+      'url(img/meat.png)'];
     var current = 0;
 
     function nextBackground() {
@@ -39,8 +39,8 @@ angular.module('starter.controllers', ['ngCordova'])
 })
 
 .controller('ChatsCtrl', function($scope) {
-  $scope.bgimg = "../img/zutapozadina.png";
-  $.getJSON('//ip-api.com/json?callback=?', function(data) {
+  $scope.bgimg = "img/zutapozadina.png";
+  $.getJSON('http://ip-api.com/json?callback=?', function(data) {
     localStorage.setItem('lat', data.lat);
     localStorage.setItem('long', data.lon);
   });
@@ -79,7 +79,7 @@ angular.module('starter.controllers', ['ngCordova'])
 })
 
 .controller('AccountCtrl', function($scope) {
-  $scope.bgimg = "../img/zutapozadina.png";
+  $scope.bgimg = "img/zutapozadina.png";
   $scope.settings = {
     enableFriends: true
   };
