@@ -1,69 +1,6 @@
-/*body {
-  background-color: #F6F8FC;
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.firstScreenBtn {
-  background-image: url("../img/rozedugme.png");
-  background-size: 1000%;
-  background-position: 20% 70%;
-  background-repeat: no-repeat;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 10px;
-  width: 80%;
-  height: 50px;
-  color: rgb(172, 84, 84);
-  font-size: 18px;
-  display: block;
-  border: none;
-}
-
-#thex {
-  background-image: url("../img/rozexic.png");
-  background-size: 400%;
-  background-position: 9% 19%;
-  width: 90%;
-  height: 50px;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#company {
-  background-image: url("../img/cakna.png");
-  background-size: 550%;
-  background-position: 49% 25%;
-  width: 85%;
-  height: 100px;
-  margin-top: -10px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#logo {
-  background-image: url("../img/soda.png");
-  background-position: 13% 49%;
-  background-size: 100%;
-  margin-bottom: 60px;
-  margin-top: -10px;
-  width: 70%;
-  height: 220px;
-  margin-left: 15%;
-  background-repeat: no-repeat;
-}
-
-a {
-    text-decoration: none !important;
-}*/
-
 /*First screen style*/
 body {
   background-color: #F6F8FC;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  /*background-color: white;*/
 }
 .firstScreenBtn {
   background-image: url("../img/rozedugme.png");
@@ -101,8 +38,6 @@ body {
   margin-right: auto;
 }
 #logoFirst {
-  /*background-image: url("../img/soda.png");
-  background-position: 13% 49%;*/
   background-size: 100%;
   margin-bottom: 60px;
   margin-top: -10px;
@@ -172,14 +107,24 @@ a {
 
 .headerSecond {
   width: 100%;
-  top: 0;
-  height: auto;
-  display: block;
+  height: 100px;
+  background-color: transparent;
+}
+
+#companySecond {
+  float: left;
+  background-color: transparent;
+  width: 50%;
+  background-image: url("../img/cakna.png");
+  background-size: 450%;
+  background-position: 49% 25%;
+  width: 50%;
+  height: 100px;
 }
 
 #thexSecond {
-  display: block;
   float: left;
+  background-color: transparent;
   width: 50%;
   height: 100px;
 }
@@ -197,21 +142,8 @@ a {
   padding-top: 3px;
 }
 
-#companySecond {
-  display: block;
-  float: left;
-  background-image: url("../img/cakna.png");
-  background-size: 450%;
-  background-position: 49% 25%;
-  width: 50%;
-  height: 100px;
-  /*margin-top: -10px;
-  margin-left: auto;
-  margin-right: auto;*/
-}
-
 .infoPanel {
-  margin-top: 220px;
+  margin-top: 120px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 20px;
@@ -238,11 +170,11 @@ a {
 }
 
 /*Third screen style*/
-body {
+/*body {
   background-image: url("../img/zutapozadina.png");
   background-size: 100%;
   background-repeat: no-repeat;
-}
+}*/
 
 #personsList {
   padding-top: 5px;
@@ -252,8 +184,13 @@ body {
   width: 95%;
 }
 
+#personTable {
+  width: 92% !important;
+  margin-left: 4% !important;
+}
+
 .deliveryBoys {
-  margin-top: 170px;
+  margin-top: 70px;
   font-size: 17px;
   color: rgb(164, 153, 123);
   text-align: center;
@@ -261,14 +198,13 @@ body {
 
 .headerThird {
   width: 100%;
-  top: 0;
-  height: auto;
-  display: block;
+  height: 100px;
+  background-color: transparent;
 }
 
 #thexThird {
-  display: block;
   float: left;
+  background-color: transparent;
   width: 50%;
   height: 100px;
 }
@@ -287,8 +223,9 @@ body {
 }
 
 #companyThird {
-  display: block;
   float: left;
+  background-color: transparent;
+  width: 50%;
   background-image: url("../img/cakna.png");
   background-size: 450%;
   background-position: 49% 25%;
@@ -309,7 +246,5 @@ body {
 }
 
 .table-striped > thead {
-   /*background-color: rgb(245, 130, 33) !important;
-   border: none !important;*/
    display: none !important;
 }

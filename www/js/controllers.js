@@ -10,9 +10,36 @@ angular.module('starter.controllers', ['ngCordova'])
     localStorage.setItem('type', 'receiver');
     window.location="#/chats";
   });
+
+  $(function () {
+    var body = $('#logoFirst');
+    var backgrounds = [
+      'url(../img/soda1.png)',
+      'url(../img/water.png)',
+      'url(../img/chips.png)',
+      'url(../img/chicken.png)',
+      'url(../img/ice.png)',
+      'url(../img/cola.png)',
+      'url(../img/mix.png)',
+      'url(../img/peanut.png)',
+      'url(../img/sona.png)',
+      'url(../img/meat.png)'];
+    var current = 0;
+
+    function nextBackground() {
+        body.css(
+            'background',
+        backgrounds[current = ++current % backgrounds.length]);
+
+        setTimeout(nextBackground, 5000);
+    }
+    setTimeout(nextBackground, 5000);
+    body.css('background', backgrounds[0]);
+  });
 })
 
 .controller('ChatsCtrl', function($scope) {
+  $scope.bgimg = "../img/zutapozadina.png";
   $.getJSON('//ip-api.com/json?callback=?', function(data) {
     localStorage.setItem('lat', data.lat);
     localStorage.setItem('long', data.lon);
@@ -53,6 +80,7 @@ angular.module('starter.controllers', ['ngCordova'])
 })
 
 .controller('AccountCtrl', function($scope) {
+  $scope.bgimg = "../img/zutapozadina.png";
   $scope.settings = {
     enableFriends: true
   };
