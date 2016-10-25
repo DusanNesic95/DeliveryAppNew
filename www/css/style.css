@@ -51,12 +51,6 @@ a {
 }
 
 /*Second screen style*/
-/*body {
-  background-image: url("../img/zutapozadina.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-}*/
-
 .inputParts {
   width: 90% !important;
   margin-top: 10px;
@@ -67,7 +61,6 @@ a {
   height: 50px !important;
   border: none !important;
 }
-
 .secondScreenBtn {
   display: block;
   float: left;
@@ -80,7 +73,6 @@ a {
   text-align: left;
   padding-left: 5px !important;
 }
-
 .icons {
   text-align: left;
   font-size: 28px !important;
@@ -90,7 +82,6 @@ a {
   margin-top: 10px !important;
   margin-left: 15px !important;
 }
-
 #submit {
   width: 90% !important;
   height: 50px !important;
@@ -104,13 +95,11 @@ a {
   border: none;
   text-align: center;
 }
-
 .headerSecond {
   width: 100%;
   height: 100px;
   background-color: transparent;
 }
-
 #companySecond {
   float: left;
   background-color: transparent;
@@ -121,14 +110,12 @@ a {
   width: 50%;
   height: 100px;
 }
-
 #thexSecond {
   float: left;
   background-color: transparent;
   width: 50%;
   height: 100px;
 }
-
 .rectSecond {
   background-color: #FFF7C3;
   color: #D4C142;
@@ -141,7 +128,6 @@ a {
   border-radius: 3px;
   padding-top: 3px;
 }
-
 .infoPanel {
   margin-top: 120px;
   margin-left: auto;
@@ -152,7 +138,6 @@ a {
   background-color: #EEEFF1;
   border-radius: 3px;
 }
-
 #emptyFields {
  display: none;
  min-width: 250px;
@@ -170,12 +155,6 @@ a {
 }
 
 /*Third screen style*/
-/*body {
-  background-image: url("../img/zutapozadina.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-}*/
-
 #personsList {
   padding-top: 5px;
   margin-top: 10px;
@@ -183,32 +162,27 @@ a {
   height: auto;
   width: 95%;
 }
-
 #personTable {
   width: 92% !important;
   margin-left: 4% !important;
 }
-
 .deliveryBoys {
   margin-top: 70px;
   font-size: 17px;
   color: rgb(164, 153, 123);
   text-align: center;
 }
-
 .headerThird {
   width: 100%;
   height: 100px;
   background-color: transparent;
 }
-
 #thexThird {
   float: left;
   background-color: transparent;
   width: 50%;
   height: 100px;
 }
-
 .rectThird {
   background-color: #FDF5DF;
   color: #9B8D6B;
@@ -221,7 +195,6 @@ a {
   border-radius: 3px;
   padding-top: 3px;
 }
-
 #companyThird {
   float: left;
   background-color: transparent;
@@ -232,17 +205,24 @@ a {
   width: 50%;
   height: 100px;
 }
-
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
    background-color: rgb(251, 238, 205) !important;
    color: rgb(164, 153, 123) !important;
    border: 1px solid white !important;
+   padding-left: 5px !important;
+   padding-top: 5px !important;
+   padding-bottom: 5px !important;
+   font-size: 14px !important;
 }
 
 .table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
    background-color: rgb( 249, 240, 217) !important;
    color: rgb(164, 153, 123) !important;
    border: 1px solid white !important;
+   padding-left: 5px !important;
+   padding-top: 5px !important;
+   padding-bottom: 5px !important;
+   font-size: 14px !important;
 }
 
 .table-striped > thead {

@@ -61,7 +61,6 @@ angular.module('starter.controllers', ['ngCordova'])
         longitude : localStorage.getItem('long'),
         role : type
       }
-      console.log(object);
       $.post('http://dusannesicdevelopment.sytes.net/deliveryapp/addUserService.php', JSON.stringify(object), function(response) {
         if (response != null) {
           localStorage.setItem('array', response);
@@ -84,4 +83,16 @@ angular.module('starter.controllers', ['ngCordova'])
   $scope.settings = {
     enableFriends: true
   };
+  setTimeout(function() {
+    var data = localStorage.getItem('array');
+    if (data != null && data != "") {
+      var array = JSON.parse(data);
+      var trHTML = '';
+      for (var i = 0; i < array.length; i++) {
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td></tr>';
+      }
+      $('#personTable').append(trHTML);
+    }
+    localStorage.setItem('array', "");
+  }, 1000);
 });
