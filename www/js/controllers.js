@@ -13,15 +13,10 @@ angular.module('starter.controllers', ['ngCordova'])
 })
 
 .controller('ChatsCtrl', function($scope) {
-  var lat = "";
-  var long = "";
   $.getJSON('//ip-api.com/json?callback=?', function(data) {
-    lat = data.lat;
-    long = data.long;
+    localStorage.setItem('lat', data.lat);
+    localStorage.setItem('long', data.lon);
   });
-
-  console.log(lat);
-  console.log(long);
 
   $("#submit").click(function() {
     var type = localStorage.getItem('type');
@@ -35,18 +30,15 @@ angular.module('starter.controllers', ['ngCordova'])
       var object = {
         name : name,
         number : number,
-        latitude : $scope.lat,
-        longitude : $scope.long,
+        latitude : localStorage.getItem('lat'),
+        longitude : localStorage.getItem('long'),
         role : type
       }
-
-      alert($scope.lat);
-      alert($scope.long);
-
-      $.post('http://http://dusannesicdevelopment.sytes.net/deliveryapp/addUserService.php', JSON.stringify(object), function(response) {
-        alert("response");
+      console.log(object);
+      $.post('http://dusannesicdevelopment.sytes.net/deliveryapp/addUserService.php', JSON.stringify(object), function(response) {
         if (response != null) {
           localStorage.setItem('array', response);
+          window.location="#/tab/account"
         } else {
           alert("Internet connection problem!");
         }
