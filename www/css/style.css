@@ -1,9 +1,7 @@
-/* Empty. Add your own CSS if you like */
-body {
+/*body {
   background-color: #F6F8FC;
   background-size: 100%;
   background-repeat: no-repeat;
-  /*background-color: white;*/
 }
 
 .firstScreenBtn {
@@ -45,8 +43,8 @@ body {
 }
 
 #logo {
-  /*background-image: url("../img/soda.png");
-  background-position: 13% 49%;*/
+  background-image: url("../img/soda.png");
+  background-position: 13% 49%;
   background-size: 100%;
   margin-bottom: 60px;
   margin-top: -10px;
@@ -58,4 +56,260 @@ body {
 
 a {
     text-decoration: none !important;
+}*/
+
+/*First screen style*/
+body {
+  background-color: #F6F8FC;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  /*background-color: white;*/
+}
+.firstScreenBtn {
+  background-image: url("../img/rozedugme.png");
+  background-size: 1000%;
+  background-position: 20% 70%;
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 80%;
+  height: 50px;
+  color: rgb(172, 84, 84);
+  font-size: 18px;
+  display: block;
+  border: none;
+}
+#thexFirst {
+  background-image: url("../img/rozexic.png");
+  background-size: 400%;
+  background-position: 9% 19%;
+  width: 90%;
+  height: 50px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#companyFirst {
+  background-image: url("../img/cakna.png");
+  background-size: 550%;
+  background-position: 49% 25%;
+  width: 85%;
+  height: 100px;
+  margin-top: -10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#logoFirst {
+  /*background-image: url("../img/soda.png");
+  background-position: 13% 49%;*/
+  background-size: 100%;
+  margin-bottom: 60px;
+  margin-top: -10px;
+  width: 70%;
+  height: 220px;
+  margin-left: 15%;
+  background-repeat: no-repeat;
+}
+a {
+    text-decoration: none !important;
+}
+
+/*Second screen style*/
+/*body {
+  background-image: url("../img/zutapozadina.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}*/
+
+.inputParts {
+  width: 90% !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 5px;
+  margin-left: 5%;
+  height: 50px !important;
+  border: none !important;
+}
+
+.secondScreenBtn {
+  display: block;
+  float: left;
+  width: 84% !important;
+  background-color: transparent;
+  color: #bbbcbf;
+  font-size: 18px;
+  height: 50px !important;
+  border: none;
+  text-align: left;
+  padding-left: 5px !important;
+}
+
+.icons {
+  text-align: left;
+  font-size: 28px !important;
+  color: #bbbcbf !important;
+  display: block;
+  float: left;
+  margin-top: 10px !important;
+  margin-left: 15px !important;
+}
+
+#submit {
+  width: 90% !important;
+  height: 50px !important;
+  background-color: #FEDB65;
+  border-radius: 5px;
+  margin-left: 5%;
+  margin-bottom: 30px;
+  color: #4f5051;
+  font-size: 18px;
+  display: block;
+  border: none;
+  text-align: center;
+}
+
+.headerSecond {
+  width: 100%;
+  top: 0;
+  height: auto;
+  display: block;
+}
+
+#thexSecond {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 100px;
+}
+
+.rectSecond {
+  background-color: #FFF7C3;
+  color: #D4C142;
+  width: 26px;
+  height: 26px;
+  margin-left: 70%;
+  margin-top: 25px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 3px;
+  padding-top: 3px;
+}
+
+#companySecond {
+  display: block;
+  float: left;
+  background-image: url("../img/cakna.png");
+  background-size: 450%;
+  background-position: 49% 25%;
+  width: 50%;
+  height: 100px;
+  /*margin-top: -10px;
+  margin-left: auto;
+  margin-right: auto;*/
+}
+
+.infoPanel {
+  margin-top: 220px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  width: 94%;
+  height: 42%;
+  background-color: #EEEFF1;
+  border-radius: 3px;
+}
+
+#emptyFields {
+ display: none;
+ min-width: 250px;
+ margin-left: -125px;
+ background-color: rgb(245, 130, 33);
+ color: white;
+ text-shadow: 1px 1px black;
+ text-align: center;
+ border-radius: 2px;
+ padding: 16px;
+ position: fixed;
+ z-index: 2147483646;
+ left: 50%;
+ bottom: 30px;
+}
+
+/*Third screen style*/
+body {
+  background-image: url("../img/zutapozadina.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#personsList {
+  padding-top: 5px;
+  margin-top: 10px;
+  margin-left: 2.5%;
+  height: auto;
+  width: 95%;
+}
+
+.deliveryBoys {
+  margin-top: 170px;
+  font-size: 17px;
+  color: rgb(164, 153, 123);
+  text-align: center;
+}
+
+.headerThird {
+  width: 100%;
+  top: 0;
+  height: auto;
+  display: block;
+}
+
+#thexThird {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 100px;
+}
+
+.rectThird {
+  background-color: #FDF5DF;
+  color: #9B8D6B;
+  width: 26px;
+  height: 26px;
+  margin-left: 70%;
+  margin-top: 25px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 3px;
+  padding-top: 3px;
+}
+
+#companyThird {
+  display: block;
+  float: left;
+  background-image: url("../img/cakna.png");
+  background-size: 450%;
+  background-position: 49% 25%;
+  width: 50%;
+  height: 100px;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: rgb(251, 238, 205) !important;
+   color: rgb(164, 153, 123) !important;
+   border: 1px solid white !important;
+}
+
+.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+   background-color: rgb( 249, 240, 217) !important;
+   color: rgb(164, 153, 123) !important;
+   border: 1px solid white !important;
+}
+
+.table-striped > thead {
+   /*background-color: rgb(245, 130, 33) !important;
+   border: none !important;*/
+   display: none !important;
 }
