@@ -1,13 +1,25 @@
+function initMap() {
+  var uluru = {lat: -25.363, lng: 131.044};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: uluru
+  });
+  var marker = new google.maps.Marker({
+    position: uluru,
+    map: map
+  });
+}
+
 angular.module('starter.controllers', ['ngCordova'])
 
 .controller('DashCtrl', function($scope) {
   $("#firstOpt").click(function() {
-    localStorage.setItem('type', 'deliver');
+    localStorage.setItem('type', 'deliveryBoy');
     window.location="#/chats";
   });
 
   $("#secondOpt").click(function() {
-    localStorage.setItem('type', 'receiver');
+    localStorage.setItem('type', 'customer');
     window.location="#/chats";
   });
 
@@ -61,10 +73,14 @@ angular.module('starter.controllers', ['ngCordova'])
         longitude : localStorage.getItem('long'),
         role : type
       }
-      $.post('http://dusannesicdevelopment.sytes.net/deliveryapp/addUserService.php', JSON.stringify(object), function(response) {
+      $.post('http://192.168.0.102/deliveryapp/addUserService.php', JSON.stringify(object), function(response) {
         if (response != null) {
           localStorage.setItem('array', response);
-          window.location="#/tab/account"
+          if (type == "deliveryBoy") {
+            window.location="#/tab/account";
+          } else if (type == "customer") {
+            window.location="#/tab/list";
+          }
         } else {
           alert("Internet connection problem!");
         }
@@ -76,6 +92,25 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
+})
+
+.controller('ListCtrl', function($scope) {
+  $scope.bgimg = "img/zutapozadina.png";
+  $scope.settings = {
+    enableFriends: true
+  };
+  setTimeout(function() {
+    var data = localStorage.getItem('array');
+    if (data != null && data != "") {
+      var array = JSON.parse(data);
+      var trHTML = '';
+      for (var i = 0; i < array.length; i++) {
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td></tr>';
+      }
+      $('#personTable').append(trHTML);
+    }
+    localStorage.setItem('array', "");
+  }, 1000);
 })
 
 .controller('AccountCtrl', function($scope) {
@@ -95,4 +130,19 @@ angular.module('starter.controllers', ['ngCordova'])
     }
     localStorage.setItem('array', "");
   }, 1000);
+
+  $("#listView").click(function() {
+    $("#map").hide();
+    $(this).hide();
+    $("#mapView").show();
+    $("#personsList").show();
+  });
+
+  $("#mapView").click(function() {
+    $("#personsList").hide();
+    $(this).hide();
+    $("#map").show();
+    $("#listView").show();
+    $("#listView").css("margin-left: 5%;");
+  });
 });
