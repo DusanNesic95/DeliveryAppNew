@@ -163,12 +163,13 @@ a {
   margin-top: 10px;
   border-radius: 2px;
   display: none;
+  overflow: visible;
 }
-#listView {
+/*#listView {
   margin-left: auto;
   margin-right: auto;
   display: none;
-}
+}*/
 #personsList {
   padding-top: 5px;
   margin-top: 10px;

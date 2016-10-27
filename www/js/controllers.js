@@ -1,3 +1,6 @@
+var postUrlProduction = "http://dusannesicdevelopment.sytes.net/deliveryapp/addUserService.php";
+var postUrlDevelopment = "http://localhost:90/deliveryapp/addUserService.php";
+
 function initMap() {
   var uluru = {lat: -25.363, lng: 131.044};
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -14,12 +17,12 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('DashCtrl', function($scope) {
   $("#firstOpt").click(function() {
-    localStorage.setItem('type', 'deliveryBoy');
+    localStorage.setItem('type', 'customer');
     window.location="#/chats";
   });
 
   $("#secondOpt").click(function() {
-    localStorage.setItem('type', 'customer');
+    localStorage.setItem('type', 'deliveryBoy');
     window.location="#/chats";
   });
 
@@ -73,8 +76,9 @@ angular.module('starter.controllers', ['ngCordova'])
         longitude : localStorage.getItem('long'),
         role : type
       }
-      $.post('http://192.168.0.102/deliveryapp/addUserService.php', JSON.stringify(object), function(response) {
+      $.post(postUrlProduction, JSON.stringify(object), function(response) {
         if (response != null) {
+          localStorage.setItem('currentUser', JSON.stringify(object));
           localStorage.setItem('array', response);
           if (type == "deliveryBoy") {
             window.location="#/tab/account";
@@ -95,25 +99,30 @@ angular.module('starter.controllers', ['ngCordova'])
 })
 
 .controller('ListCtrl', function($scope) {
-  $scope.bgimg = "img/zutapozadina.png";
-  $scope.settings = {
-    enableFriends: true
-  };
-  setTimeout(function() {
-    var data = localStorage.getItem('array');
-    if (data != null && data != "") {
-      var array = JSON.parse(data);
-      var trHTML = '';
-      for (var i = 0; i < array.length; i++) {
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td></tr>';
-      }
-      $('#personTable').append(trHTML);
-    }
-    localStorage.setItem('array', "");
-  }, 1000);
-})
+  $scope.object = JSON.parse(localStorage.getItem('currentUser'));
+  $scope.lat = parseFloat($scope.object.latitude);
+  $scope.long = parseFloat($scope.object.longitude);
+  var map;
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: $scope.lat, lng: $scope.long},
+    zoom: 10
+  });
+  var center = new google.maps.LatLng($scope.lat, $scope.long);
+  map.setCenter(center);
 
-.controller('AccountCtrl', function($scope) {
+  $scope.doRefresh = function() {
+    if ($scope.object != null) {
+      $.post(postUrlProduction, JSON.stringify($scope.object), function(response) {
+        if (response != null) {
+          localStorage.setItem('array', response);
+          window.location.reload();
+        } else {
+          alert("Internet connection problem!");
+        }
+      });
+    }
+  }
+
   $scope.bgimg = "img/zutapozadina.png";
   $scope.settings = {
     enableFriends: true
@@ -125,6 +134,14 @@ angular.module('starter.controllers', ['ngCordova'])
       var trHTML = '';
       for (var i = 0; i < array.length; i++) {
         trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td></tr>';
+        var posLat = parseFloat(array[i].latitude);
+        var posLng = parseFloat(array[i].longitude);
+        var position = {lat: posLat, lng: posLng};
+        var marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          title: array[i].name
+        });
       }
       $('#personTable').append(trHTML);
     }
@@ -142,7 +159,75 @@ angular.module('starter.controllers', ['ngCordova'])
     $("#personsList").hide();
     $(this).hide();
     $("#map").show();
+    google.maps.event.trigger(map, 'resize');
     $("#listView").show();
-    $("#listView").css("margin-left: 5%;");
+    $("#listView").css("margin-left: 5% !important;");
+  });
+})
+
+.controller('AccountCtrl', function($scope) {
+  $scope.object = JSON.parse(localStorage.getItem('currentUser'));
+  $scope.lat = parseFloat($scope.object.latitude);
+  $scope.long = parseFloat($scope.object.longitude);
+  var map;
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: $scope.lat, lng: $scope.long},
+    zoom: 10
+  });
+  var center = new google.maps.LatLng($scope.lat, $scope.long);
+  map.setCenter(center);
+
+  $scope.doRefresh = function() {
+    if ($scope.object != null) {
+      $.post(postUrlProduction, JSON.stringify($scope.object), function(response) {
+        if (response != null) {
+          localStorage.setItem('array', response);
+          window.location.reload();
+        } else {
+          alert("Internet connection problem!");
+        }
+      });
+    }
+  }
+
+  $scope.bgimg = "img/zutapozadina.png";
+  $scope.settings = {
+    enableFriends: true
+  };
+  setTimeout(function() {
+    var data = localStorage.getItem('array');
+    if (data != null && data != "") {
+      var array = JSON.parse(data);
+      var trHTML = '';
+      for (var i = 0; i < array.length; i++) {
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td></tr>';
+        var posLat = parseFloat(array[i].latitude);
+        var posLng = parseFloat(array[i].longitude);
+        var position = {lat: posLat, lng: posLng};
+        var marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          title: array[i].name
+        });
+      }
+      $('#personTable').append(trHTML);
+    }
+    localStorage.setItem('array', "");
+  }, 1000);
+
+  $("#listView").click(function() {
+    $("#map").hide();
+    $(this).hide();
+    $("#mapView").show();
+    $("#personsList").show();
+  });
+
+  $("#mapView").click(function() {
+    $("#personsList").hide();
+    $(this).hide();
+    $("#map").show();
+    google.maps.event.trigger(map, 'resize');
+    $("#listView").show();
+    $("#listView").css("margin-left: 5% !important;");
   });
 });
