@@ -1,5 +1,5 @@
 var postUrlProduction = "http://dusannesicdevelopment.sytes.net/deliveryapp/addUserService.php";
-var postUrlDevelopment = "http://localhost:90/deliveryapp/addUserService.php";
+var postUrlDevelopment = "http://192.168.200.56/deliveryapp/addUserService.php";
 
 function initMap() {
   var uluru = {lat: -25.363, lng: 131.044};
@@ -76,7 +76,7 @@ angular.module('starter.controllers', ['ngCordova'])
         longitude : localStorage.getItem('long'),
         role : type
       }
-      $.post(postUrlProduction, JSON.stringify(object), function(response) {
+      $.post(postUrlDevelopment, JSON.stringify(object), function(response) {
         if (response != null) {
           localStorage.setItem('currentUser', JSON.stringify(object));
           localStorage.setItem('array', response);
@@ -127,13 +127,33 @@ angular.module('starter.controllers', ['ngCordova'])
   $scope.settings = {
     enableFriends: true
   };
+
+  $scope.deg2rad = function(deg) {
+    return deg * (Math.PI/180)
+  }
+
+  $scope.getDistanceFromLatLonInKm = function(lat1,lon1,lat2,lon2) {
+     var R = 6371; // Radius of the earth in km
+     var dLat = $scope.deg2rad(lat2-lat1);  // deg2rad below
+     var dLon = $scope.deg2rad(lon2-lon1);
+     var a =
+       Math.sin(dLat/2) * Math.sin(dLat/2) +
+       Math.cos($scope.deg2rad(lat1)) * Math.cos($scope.deg2rad(lat2)) *
+       Math.sin(dLon/2) * Math.sin(dLon/2)
+       ;
+     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+     var d = R * c; // Distance in km
+     return d;
+  }
+
   setTimeout(function() {
     var data = localStorage.getItem('array');
     if (data != null && data != "") {
       var array = JSON.parse(data);
       var trHTML = '';
       for (var i = 0; i < array.length; i++) {
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td></tr>';
+        var distance = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td></tr>';
         var posLat = parseFloat(array[i].latitude);
         var posLng = parseFloat(array[i].longitude);
         var position = {lat: posLat, lng: posLng};
@@ -194,13 +214,33 @@ angular.module('starter.controllers', ['ngCordova'])
   $scope.settings = {
     enableFriends: true
   };
+
+  $scope.deg2rad = function(deg) {
+    return deg * (Math.PI/180)
+  }
+
+  $scope.getDistanceFromLatLonInKm = function(lat1,lon1,lat2,lon2) {
+     var R = 6371; // Radius of the earth in km
+     var dLat = $scope.deg2rad(lat2-lat1);  // deg2rad below
+     var dLon = $scope.deg2rad(lon2-lon1);
+     var a =
+       Math.sin(dLat/2) * Math.sin(dLat/2) +
+       Math.cos($scope.deg2rad(lat1)) * Math.cos($scope.deg2rad(lat2)) *
+       Math.sin(dLon/2) * Math.sin(dLon/2)
+       ;
+     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+     var d = R * c; // Distance in km
+     return d;
+  }
+
   setTimeout(function() {
     var data = localStorage.getItem('array');
     if (data != null && data != "") {
       var array = JSON.parse(data);
       var trHTML = '';
       for (var i = 0; i < array.length; i++) {
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td></tr>';
+        var distance = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td></tr>';
         var posLat = parseFloat(array[i].latitude);
         var posLng = parseFloat(array[i].longitude);
         var position = {lat: posLat, lng: posLng};
