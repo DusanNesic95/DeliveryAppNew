@@ -152,8 +152,9 @@ angular.module('starter.controllers', ['ngCordova'])
       var array = JSON.parse(data);
       var trHTML = '';
       for (var i = 0; i < array.length; i++) {
-        var distance = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td></tr>';
+        var distanceDecimal = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
+        var distance = Math.round(distanceDecimal * 100) / 100
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td><td><a href="#/tab/inbox" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
         var posLat = parseFloat(array[i].latitude);
         var posLng = parseFloat(array[i].longitude);
         var position = {lat: posLat, lng: posLng};
@@ -239,8 +240,9 @@ angular.module('starter.controllers', ['ngCordova'])
       var array = JSON.parse(data);
       var trHTML = '';
       for (var i = 0; i < array.length; i++) {
-        var distance = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td></tr>';
+        var distanceDecimal = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
+        var distance = Math.round(distanceDecimal * 100) / 100;
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td><td><a href="#/tab/inbox" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
         var posLat = parseFloat(array[i].latitude);
         var posLng = parseFloat(array[i].longitude);
         var position = {lat: posLat, lng: posLng};
@@ -270,4 +272,8 @@ angular.module('starter.controllers', ['ngCordova'])
     $("#listView").show();
     $("#listView").css("margin-left: 5% !important;");
   });
+})
+
+.controller('InboxCtrl', function($scope) {
+  $scope.bgimg = "img/zutapozadina.png";
 });

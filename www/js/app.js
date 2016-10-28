@@ -87,6 +87,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'AccountCtrl'
       }
     }
+  })
+
+  .state('tab.inbox', {
+    url: '/inbox',
+    views: {
+      'tab-inbox': {
+        templateUrl: 'templates/tab-inbox.html',
+        controller: 'InboxCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
