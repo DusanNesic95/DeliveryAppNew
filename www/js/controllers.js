@@ -128,8 +128,13 @@ angular.module('starter.controllers', ['ngCordova'])
     $.post(postUrlMessageDevelopment, JSON.stringify(object), function(response) {
       console.log(response);
       $("#inputArea").val("");
+      window.location="#/tab/messages";
     });
   });
+})
+
+.controller('MessagesCtrl', function($scope, $stateParams) {
+  $scope.bgimg = "img/zutapozadina.png";
 
 })
 
