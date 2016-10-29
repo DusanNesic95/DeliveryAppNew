@@ -1,6 +1,18 @@
 <ion-view view-title="Inbox" hide-nav-bar="true" hide-back-button="true">
   <ion-content style="background-image: url({{ bgimg }}); background-size: 100%;
   background-repeat: no-repeat">
-    <h2>This is the inbox page</h2>
+    <div class="headerFourth">
+      <div id="companyFourth"></div>
+      <div id="thexFourth">
+        <div class="rectFourth">
+          X
+        </div>
+      </div>
+    </div>
+    <h4 class="title">Contact user</h4>
+    <p class="userInfo"> Name: {{ nameTo }} </p>
+    <p class="userInfo"> Number: {{ numberTo }} </p>
+    <textarea rows="10" id="inputArea" placeholder="YOUR MESSAGE HERE"></textarea>
+    <button type="button" class="fourthScreenBtn" id="sendBtn">SEND</button>
   </ion-content>
 </ion-view>

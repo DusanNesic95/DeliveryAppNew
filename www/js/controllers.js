@@ -1,5 +1,7 @@
 var postUrlProduction = "http://dusannesicdevelopment.sytes.net/deliveryapp/addUserService.php";
 var postUrlDevelopment = "http://192.168.0.108/deliveryapp/addUserService.php";
+var postUrlMessageProduction = "http://dusannesicdevelopment.sytes.net/deliveryapp/addMessageService.php";
+var postUrlMessageDevelopment = "http://192.168.0.108/deliveryapp/addMessageService.php";
 
 function initMap() {
   var uluru = {lat: -25.363, lng: 131.044};
@@ -11,7 +13,15 @@ function initMap() {
     position: uluru,
     map: map
   });
-}
+};
+
+function sendMessage(nameTo, numberTo) {
+  console.log(nameTo);
+  console.log(numberTo);
+  localStorage.setItem('nameTo', nameTo);
+  localStorage.setItem('numberTo', numberTo);
+  window.location="#/tab/inbox";
+};
 
 angular.module('starter.controllers', ['ngCordova'])
 
@@ -69,14 +79,16 @@ angular.module('starter.controllers', ['ngCordova'])
           $("#emptyFields").fadeIn().delay(1300).fadeOut(300);
       });
     } else {
+      localStorage.setItem('nameFrom', name);
+      localStorage.setItem('numberFrom', number);
       var object = {
-        name : name,
+        username : name,
         number : number,
         latitude : localStorage.getItem('lat'),
         longitude : localStorage.getItem('long'),
         role : type
       }
-      $.post(postUrlProduction, JSON.stringify(object), function(response) {
+      $.post(postUrlDevelopment, JSON.stringify(object), function(response) {
         if (response != null) {
           localStorage.setItem('currentUser', JSON.stringify(object));
           localStorage.setItem('array', response);
@@ -99,6 +111,26 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('InboxCtrl', function($scope, $stateParams) {
   $scope.bgimg = "img/zutapozadina.png";
+  $scope.nameFrom = localStorage.getItem('nameFrom');
+  $scope.numberFrom = localStorage.getItem('numberFrom');
+  $scope.nameTo = localStorage.getItem('nameTo');
+  $scope.numberTo = localStorage.getItem('numberTo');
+
+  $("#sendBtn").click(function() {
+    var textMessage = $("#inputArea").val();
+    var object = {
+      nameFrom : $scope.nameFrom,
+      numberFrom : $scope.numberFrom,
+      nameTo : $scope.nameTo,
+      numberTo : $scope.numberTo,
+      text : textMessage
+    }
+    $.post(postUrlMessageDevelopment, JSON.stringify(object), function(response) {
+      console.log(response);
+      $("#inputArea").val("");
+    });
+  });
+
 })
 
 .controller('ListCtrl', function($scope) {
@@ -115,7 +147,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
   $scope.doRefresh = function() {
     if ($scope.object != null) {
-      $.post(postUrlProduction, JSON.stringify($scope.object), function(response) {
+      $.post(postUrlDevelopment, JSON.stringify($scope.object), function(response) {
         if (response != null) {
           localStorage.setItem('array', response);
           window.location.reload();
@@ -133,7 +165,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
   $scope.deg2rad = function(deg) {
     return deg * (Math.PI/180)
-  }
+  };
 
   $scope.getDistanceFromLatLonInKm = function(lat1,lon1,lat2,lon2) {
      var R = 6371; // Radius of the earth in km
@@ -147,7 +179,7 @@ angular.module('starter.controllers', ['ngCordova'])
      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
      var d = R * c; // Distance in km
      return d;
-  }
+  };
 
   setTimeout(function() {
     var data = localStorage.getItem('array');
@@ -156,15 +188,17 @@ angular.module('starter.controllers', ['ngCordova'])
       var trHTML = '';
       for (var i = 0; i < array.length; i++) {
         var distanceDecimal = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
-        var distance = Math.round(distanceDecimal * 100) / 100
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td><td><a href="#/tab/inbox" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
+        var distance = Math.round(distanceDecimal * 100) / 100;
+        var username = "'" + array[i].username + "'";
+        var number = array[i].number;
+        trHTML += '<tr><td>' + array[i].username + '</td><td>' + number + '</td><td>' + distance + '</td><td><a onclick="sendMessage(' + username + ',' + number + ')" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
         var posLat = parseFloat(array[i].latitude);
         var posLng = parseFloat(array[i].longitude);
         var position = {lat: posLat, lng: posLng};
         var marker = new google.maps.Marker({
           position: position,
           map: map,
-          title: array[i].name
+          title: array[i].username
         });
       }
       $('#personTable').append(trHTML);
@@ -245,14 +279,16 @@ angular.module('starter.controllers', ['ngCordova'])
       for (var i = 0; i < array.length; i++) {
         var distanceDecimal = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
         var distance = Math.round(distanceDecimal * 100) / 100;
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td><td><a href="#/tab/inbox" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
+        var username = "'" + array[i].username + "'";
+        var number = array[i].number;
+        trHTML += '<tr><td>' + array[i].username + '</td><td>' + number + '</td><td>' + distance + '</td><td><a onclick="sendMessage(' + username + ',' + number + ')" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
         var posLat = parseFloat(array[i].latitude);
         var posLng = parseFloat(array[i].longitude);
         var position = {lat: posLat, lng: posLng};
         var marker = new google.maps.Marker({
           position: position,
           map: map,
-          title: array[i].name
+          title: array[i].username
         });
       }
       $('#personTable').append(trHTML);
