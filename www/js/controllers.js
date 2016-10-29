@@ -76,7 +76,7 @@ angular.module('starter.controllers', ['ngCordova'])
         longitude : localStorage.getItem('long'),
         role : type
       }
-      $.post(postUrlDevelopment, JSON.stringify(object), function(response) {
+      $.post(postUrlProduction, JSON.stringify(object), function(response) {
         if (response != null) {
           localStorage.setItem('currentUser', JSON.stringify(object));
           localStorage.setItem('array', response);
@@ -97,8 +97,8 @@ angular.module('starter.controllers', ['ngCordova'])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('InboxCtrl', function($scope) {
-    $scope.bgimg = "img/zutapozadina.png";
+.controller('InboxCtrl', function($scope, $stateParams) {
+  $scope.bgimg = "img/zutapozadina.png";
 })
 
 .controller('ListCtrl', function($scope) {
@@ -157,7 +157,7 @@ angular.module('starter.controllers', ['ngCordova'])
       for (var i = 0; i < array.length; i++) {
         var distanceDecimal = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
         var distance = Math.round(distanceDecimal * 100) / 100
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td><td><a href="#/inbox" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td><td><a href="#/tab/inbox" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
         var posLat = parseFloat(array[i].latitude);
         var posLng = parseFloat(array[i].longitude);
         var position = {lat: posLat, lng: posLng};
@@ -245,7 +245,7 @@ angular.module('starter.controllers', ['ngCordova'])
       for (var i = 0; i < array.length; i++) {
         var distanceDecimal = $scope.getDistanceFromLatLonInKm($scope.lat, $scope.long, array[i].latitude, array[i].longitude);
         var distance = Math.round(distanceDecimal * 100) / 100;
-        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td><td><a href="#/inbox" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
+        trHTML += '<tr><td>' + array[i].name + '</td><td>' + array[i].number + '</td><td>' + distance + '</td><td><a href="#/tab/inbox" style="text-decoration: none !important; color: rgb(164, 153, 123) !important;">Send</a></td></tr>';
         var posLat = parseFloat(array[i].latitude);
         var posLng = parseFloat(array[i].longitude);
         var position = {lat: posLat, lng: posLng};
