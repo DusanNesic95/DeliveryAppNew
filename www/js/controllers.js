@@ -2,6 +2,8 @@ var postUrlProduction = "http://dusannesicdevelopment.sytes.net/deliveryapp/addU
 var postUrlDevelopment = "http://192.168.0.108/deliveryapp/addUserService.php";
 var postUrlMessageProduction = "http://dusannesicdevelopment.sytes.net/deliveryapp/addMessageService.php";
 var postUrlMessageDevelopment = "http://192.168.0.108/deliveryapp/addMessageService.php";
+var postUrlGetMessagesProduction = "http://dusannesicdevelopment.sytes.net/deliveryapp/getMessages.php";
+var postUrlGetMessagesDevelopment = "http://192.168.0.108/deliveryapp/getMessages.php";
 
 function initMap() {
   var uluru = {lat: -25.363, lng: 131.044};
@@ -136,6 +138,19 @@ angular.module('starter.controllers', ['ngCordova'])
 .controller('MessagesCtrl', function($scope, $stateParams) {
   $scope.bgimg = "img/zutapozadina.png";
 
+  var name = localStorage.getItem('nameFrom');
+  var number = localStorage.getItem('numberFrom');
+  var object = {
+    nameTo : name,
+    numberTo : number
+  }
+  $.post(postUrlGetMessagesDevelopment, JSON.stringify(object), function(response) {
+    if (response != null) {
+      console.log(response);
+    } else {
+      alert("Internet connection problem!");
+    }
+  });
 })
 
 .controller('ListCtrl', function($scope) {
@@ -226,6 +241,10 @@ angular.module('starter.controllers', ['ngCordova'])
     $("#listView").show();
     $("#listView").css("margin-left: 5% !important;");
   });
+
+  $("#inboxBtn").click(function() {
+    window.location="#/tab/messages";
+  });
 })
 
 .controller('AccountCtrl', function($scope) {
@@ -315,5 +334,9 @@ angular.module('starter.controllers', ['ngCordova'])
     google.maps.event.trigger(map, 'resize');
     $("#listView").show();
     $("#listView").css("margin-left: 5% !important;");
+  });
+
+  $("#inboxBtn").click(function() {
+    window.location="#/tab/messages";
   });
 });
