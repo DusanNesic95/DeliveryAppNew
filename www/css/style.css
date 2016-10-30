@@ -331,3 +331,37 @@ a {
 }
 
 /*Fifth screen style*/
+#messagesList {
+  width: 90%;
+  margin-left: 5%;
+  height: auto;
+  padding: 5px;
+}
+.eachMessage {
+  width: 100%;
+  padding: 2px;
+  height: auto;
+  background-color: #E6E2D8;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+.messageName {
+  font-size: 16px;
+  color: #807862;
+}
+.messageNumber {
+  font-size: 16px;
+  color: #807862;
+}
+.messageText {
+  font-size: 14px;
+  color: #807862;
+}
+#noMessages {
+  font-size: 18px;
+  margin-top: 30px;
+  color: rgb(164, 153, 123);
+  margin-left: 25px;
+  display: none;
+}

@@ -18,8 +18,6 @@ function initMap() {
 };
 
 function sendMessage(nameTo, numberTo) {
-  console.log(nameTo);
-  console.log(numberTo);
   localStorage.setItem('nameTo', nameTo);
   localStorage.setItem('numberTo', numberTo);
   window.location="#/tab/inbox";
@@ -90,7 +88,7 @@ angular.module('starter.controllers', ['ngCordova'])
         longitude : localStorage.getItem('long'),
         role : type
       }
-      $.post(postUrlDevelopment, JSON.stringify(object), function(response) {
+      $.post(postUrlProduction, JSON.stringify(object), function(response) {
         if (response != null) {
           localStorage.setItem('currentUser', JSON.stringify(object));
           localStorage.setItem('array', response);
@@ -127,8 +125,7 @@ angular.module('starter.controllers', ['ngCordova'])
       numberTo : $scope.numberTo,
       text : textMessage
     }
-    $.post(postUrlMessageDevelopment, JSON.stringify(object), function(response) {
-      console.log(response);
+    $.post(postUrlMessageProduction, JSON.stringify(object), function(response) {
       $("#inputArea").val("");
       window.location="#/tab/messages";
     });
@@ -144,9 +141,18 @@ angular.module('starter.controllers', ['ngCordova'])
     nameTo : name,
     numberTo : number
   }
-  $.post(postUrlGetMessagesDevelopment, JSON.stringify(object), function(response) {
+  $.post(postUrlGetMessagesProduction, JSON.stringify(object), function(response) {
     if (response != null) {
-      console.log(response);
+      var array = JSON.parse(response)
+      if (array.length != 0) {
+        for (var i = 0; i < array.length; i++) {
+          var message = '';
+          message += '<div class="eachMessage"><p class="messageName">' + array[i].nameFrom + '</p><p class="messageNumber">' + array[i].numberFrom + '</p><p class="messageText">' + array[i].text + '</p></div>';
+          $('#messagesList').append(message);
+        }
+      } else {
+        $("#noMessages").show();
+      }
     } else {
       alert("Internet connection problem!");
     }
@@ -167,7 +173,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
   $scope.doRefresh = function() {
     if ($scope.object != null) {
-      $.post(postUrlDevelopment, JSON.stringify($scope.object), function(response) {
+      $.post(postUrlProduction, JSON.stringify($scope.object), function(response) {
         if (response != null) {
           localStorage.setItem('array', response);
           window.location.reload();
